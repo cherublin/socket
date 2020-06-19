@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="headName">懒懒的聊天室</div>
+        <button class="logout">退出</button>
+    </header>
+    <main>
+        <div class="left">
+            <div class="talk">
+                <textarea id="content"></textarea>
+            </div>
+            <div class="input">
+                <input  id="send" type="text"/>
+                <button id="button">发送</button>
+            </div>
+        </div>
+        <aside>
+            <h4>在线用户</h4>
+            <ul class="user">
+            </ul>
+        </aside>
+    </main>
+</body>
+<script src="./socket.io.js"></script>
+<script>
+    var socket = io()
+    var content = document.getElementById("content")
+    var send = document.getElementById("send")
+    var button = document.getElementById("button")
+    // 用户名字
+    var my_name = location.search.substr(1)
+    
+    // 进入广播
+    socket.emit("sendName",my_name)
+    
+    // 接收别人发出的信息
+    socket.on("receiveMessage",function (data) {
+        console.log(1111);
+        content.value+=data.client+":"+data.msg+"\r\n"
+    })
+    
+    // 接收别人和自己进入的名字
+    socket.on("receiveName",function (users) {
+        console.log(users);
+        // 进入提示     
+        content.value+=users[users.length-1]+'进入聊天室'+"\r\n"
+        // 删去所有在线用户
+        for(var i = 0; i < $('.user li').length; i++)
+        {
+            $('.user li').remove();
+        }
+        // 重新渲染在线用户
+        for(let i in users){
+            $('.user').append($('<li>').addClass(users[i]).text(users[i]));
+        }
+    })
+
+    // 接收别人离开的信息
+    socket.on('logout', function (data) {          
+        content.value+=data+"离开聊天室"+"\r\n"
+        // 删除其在线信息
+        $('.'+ data).remove()
+    })
+
+    // 发送信息    
+    button.addEventListener("click",function () {
+        var data = {client:my_name,msg:send.value}
+        socket.emit("sendMessage",data)
+        content.value+=data.client+":"+data.msg+"\r\n"
+        send.value=""
+    })
+
+    // 登出
+    $(".logout").click(function () {
+        var x = my_name
+        socket.emit("logout",x)
+        // 删除本人在线记录
+        $('.'+ my_name).remove()
+        // 重定向
+        location.href= "login.html"
+    })
+   </script>
+</html>

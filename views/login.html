@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+</head>
+<style>
+    html,body {
+        height: 100%;
+        background-color: #e0b4b6;
+    }
+    .main {
+        position: absolute;
+        left: 50%;
+        top: 200px;
+        width: 400px;
+        height: 300px;
+        transform: translate(-50%,0);
+        border-radius: 30px;
+        overflow: hidden;
+        border: 2px solid white;
+
+    }
+    .input {
+        padding-top: 40px;
+        height: 190px;
+        width: 100%;
+    }
+    .name,.password {
+        display: block;
+        float: left;
+        width: 60px;
+        height: 40px;
+        margin-top: 30px;
+        font-size: 18px;
+        line-height: 50px;
+        padding-left: 40px;
+    }
+    .my_name,.my_password {
+        height: 40px;
+        width: 230px;
+        display: block;
+        float: left;
+        margin-top: 30px;
+    }
+    .btn {
+        position: absolute;
+        width: 80px;
+        height: 40px;
+        left: 50%;
+        transform: translate(-50%,0);
+    }
+</style>
+<body>
+    <div class="main">
+        <div class="input">
+            <div class="name">昵称：</div>
+            <input class="my_name" type="text"/>
+            <div class="password">密码：</div>
+            <input class="my_password" type="text"/>
+        </div>
+        <button class="btn">登录</button>
+    </div>
+</body>
+<script>
+    $(function(){
+        // 简单的用户名／密码数据
+        var data = {x:123456,y:123456,z:123456,a:123456,b:123456}
+        var my_name = document.querySelector(".my_name")
+        var my_password = document.querySelector(".my_password")
+        var times = 0;
+        $('.btn').click(function(){
+            // 验证用户名和密码
+            for(var i in data){
+                if(my_name.value ==i && my_password.value == data[i]){
+                    url = "index.html?"+my_name.value
+                    location.href= url
+                }
+                else {
+                    times++
+                }           
+            }
+            // 报错
+            if(times%5==0&&times!=0){
+                alert("昵称或密码错误")
+                console.log(times);
+            }
+        })
+    })
+</script>
+</html>

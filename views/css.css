@@ -1,0 +1,90 @@
+html,body {
+    height: 100%;
+    background-color: #e0b4b6;
+}
+body {
+    margin: 0 auto;
+}
+header {
+    margin-top: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 600px;
+    height: 85px;
+    background-color: #557fa1;
+    border: 1px solid black;
+    
+}
+.headName {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 28px;
+}
+.logout {
+    display: block;
+    float: right;
+    height: 30px;
+    width: 60px;
+    margin-right: 10px;
+}
+main {
+    position: absolute;
+    left: 50%;
+    top: 105px;
+    transform: translate(-50%,0);
+}
+.left {
+    float: left;
+    width: 400px;
+    height: 600px;
+}
+.talk {
+    float: left;
+    width: 400px;
+    height: 400px;
+}
+.input {
+    float: left;
+    width: 400px;
+    height: 200px;
+}
+#content {
+    height: 393px; 
+    width:393px
+}
+aside {
+    float: right;
+    width: 200px;
+    height: 600px;
+    background-color: white;
+    border: 1px solid black;
+}
+aside ul li {
+    width: 150px;
+    height: 50px;
+    display: block;
+    float: left;
+    list-style: none;
+}
+#send {
+    display: block;
+    height: 150px;
+    width: 393px;
+    border: 0;
+}
+#button {
+    float: right;
+    margin-right: 10px;
+    height: 30px;
+    width: 60px;
+    margin-top: 10px;
+}
+.input {
+    background-color: #fff;
+    border: 1px solid black;
+    width: 397px;
+}
+h4 {
+    text-align: center;
+}
